@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Livraria.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<LivrariaContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("LivrariaContext") ?? throw new InvalidOperationException("Connection string 'LivrariaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
